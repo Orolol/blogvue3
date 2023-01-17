@@ -9,6 +9,9 @@
       v-text-field(label="Title" hide-details="auto" v-model='formPost.Contents[0].Title' @blur="handleSubmit")
       v-text-field(label="Abstract" hide-details="auto" v-model='formPost.Contents[0].Abstract' @blur="handleSubmit")
       v-select(label="Category"  v-model='formPost.Category' :items="cats" @blur="handleSubmit")
+      v-switch(label="Published" v-model='formPost.Public' @blur="handleSubmit")
+      v-file-input(label="Main Picture" v-model='formPost.MainPicture' @blur="handleSubmit")
+      tiptapEditor(v-model='formPost.Contents[0].Content')
       tiptapEditor(v-model='formPost.Contents[0].Content')
 
 </template>

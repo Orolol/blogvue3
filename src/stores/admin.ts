@@ -2,7 +2,12 @@ import { clientAPI } from "../backend";
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
-import type { configType, postType, categoryType } from "../types/api";
+import type {
+  configType,
+  postType,
+  categoryType,
+  pictureType,
+} from "../types/api";
 
 export const useAuthStore = defineStore("auth", () => {
   const isAdmin = ref(false);
@@ -64,6 +69,20 @@ export const useAdminStore = defineStore("admin", () => {
     await clientAPI.postApi("admin/dcat", params, true);
   };
 
+  // PICTURES #######
+  const pictures = ref<Array<pictureType>>([]);
+  const fetchPics = async () => {
+    const result = await clientAPI.getApi("admin/pics", {}, true);
+    pictures.value = result;
+  };
+  const deletePicture = async (name: string) => {
+    await clientAPI.postApi("admin/dpic", name, true);
+  };
+
+  const uploadPicture = async (file: File) => {
+    await clientAPI.postApi("admin/apic", file, true);
+  };
+
   return {
     config,
     getConfig,
@@ -75,5 +94,9 @@ export const useAdminStore = defineStore("admin", () => {
     deleteCategory,
     addCategory,
     savePost,
+    fetchPics,
+    pictures,
+    deletePicture,
+    uploadPicture,
   };
 });

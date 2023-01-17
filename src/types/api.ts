@@ -25,6 +25,12 @@ export type contentPostType = {
   LanguageID: string;
 };
 
+export type pictureType = {
+  UrlThumb: string;
+  URL: string;
+  Name: string;
+};
+
 export type commentType = {};
 export type tagType = {};
 

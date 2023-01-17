@@ -1,6 +1,11 @@
 const BASE_PATH = "http://localhost:3010/";
 import { useAuthStore } from "@/stores/admin";
 
+type header = {
+  contentType?: string;
+  Authorization?: string;
+};
+
 export const clientAPI = {
   getApi: async (
     path: string,
@@ -26,17 +31,28 @@ export const clientAPI = {
   postApi: async (path: string, payload?: any, auth: boolean = false) => {
     const token = useAuthStore().token;
 
+    let body;
+    const baseHeader: header = {};
+
+    if (payload instanceof File || payload instanceof Blob) {
+      const data = new FormData();
+      data.append("file", payload);
+      body = data;
+      console.log("data", data);
+    } else {
+      body = JSON.stringify(payload);
+      baseHeader.contentType = "application/json";
+    }
+
+    auth && (baseHeader.Authorization = "Bearer " + token);
+
+    console.log("body", body);
+    console.log("payload", payload);
+
     const request = fetch(BASE_PATH + path, {
       method: "POST",
-      headers: !auth
-        ? {
-            "Content-Type": "application/json",
-          }
-        : {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-      body: JSON.stringify(payload),
+      headers: baseHeader,
+      body: body,
     });
     const data = await requestSender(request);
     return data;
