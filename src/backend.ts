@@ -2,7 +2,7 @@ const BASE_PATH = "http://localhost:3010/";
 import { useAuthStore } from "@/stores/admin";
 
 type header = {
-  contentType?: string;
+  "content-type"?: string;
   Authorization?: string;
 };
 
@@ -41,13 +41,14 @@ export const clientAPI = {
       console.log("data", data);
     } else {
       body = JSON.stringify(payload);
-      baseHeader.contentType = "application/json";
+      baseHeader["content-type"] = "application/json";
     }
 
     auth && (baseHeader.Authorization = "Bearer " + token);
 
     console.log("body", body);
     console.log("payload", payload);
+    console.log("baseHeader", baseHeader);
 
     const request = fetch(BASE_PATH + path, {
       method: "POST",

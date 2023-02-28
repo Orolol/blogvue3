@@ -18,7 +18,6 @@ import { ref } from "vue";
 import { useAdminStore } from "@/stores/admin";
 import type { pictureType } from "@/types/api";
 
-
 const store = useAdminStore();
 
 const pictures = ref<pictureType[]>([]);
@@ -32,7 +31,7 @@ const fetchPictures = async () => {
 fetchPictures();
 
 const uploadPicture = async (e: any) => {
-  console.log(e)
+  console.log(e);
   await store.uploadPicture(e.target.files[0]);
   fetchPictures();
 };
@@ -45,7 +44,6 @@ const deletePicture = async (name: string) => {
 
 <style lang="scss">
 .picturesContainer {
-
   gap: 20px;
   margin: 20px;
 

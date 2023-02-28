@@ -16,6 +16,7 @@
     "@tiptap/extension-floating-menu": "^2.0.0-beta.204",
     "@tiptap/starter-kit": "^2.0.0-beta.204",
     "@tiptap/vue-3": "^2.0.0-beta.204",
+    "date-fns": "^2.29.3",
     "pinia": "^2.0.26",
     "pug": "^3.0.2",
     "vite-svg-loader": "^3.6.0",
@@ -25,10 +26,10 @@
     "vuetify": "^3.0.3"
   },
   "devDependencies": {
-    "@volar/vue-language-plugin-pug": "^1.0.11",
     "@rushstack/eslint-patch": "^1.1.4",
     "@types/node": "^18.11.9",
     "@vitejs/plugin-vue": "^3.2.0",
+    "@volar/vue-language-plugin-pug": "^1.0.11",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
     "@vue/tsconfig": "^0.1.3",

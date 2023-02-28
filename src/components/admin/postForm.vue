@@ -10,7 +10,7 @@
       v-text-field(label="Abstract" hide-details="auto" v-model='formPost.Contents[0].Abstract' @blur="handleSubmit")
       v-select(label="Category"  v-model='formPost.Category' :items="cats" @blur="handleSubmit")
       v-switch(label="Published" v-model='formPost.Public' @blur="handleSubmit")
-      v-file-input(label="Main Picture" v-model='formPost.MainPicture' @blur="handleSubmit")
+      pictureSelector(:pictures="formPost.Contents[0].Pictures" @blur="changePicture" :selected="formPost.MainPicture")
       tiptapEditor(v-model='formPost.Contents[0].Content')
       tiptapEditor(v-model='formPost.Contents[0].Content')
 
@@ -21,6 +21,7 @@ import type { postType } from "@/types/api";
 import { computed, ref } from "vue";
 import tiptapEditor from "@/components/editor/tiptapEditor.vue";
 import { useAdminStore } from "@/stores/admin";
+import pictureSelector from "@/components/admin/pictureSelector.vue";
 
 const store = useAdminStore();
 let showMore = ref(false);
@@ -44,6 +45,12 @@ const handleSubmit = async (e: SubmitEvent) => {
   console.log(e);
   e && e.preventDefault();
   console.log(formPost.value);
+  store.savePost(formPost.value);
+};
+
+const changePicture = (e: any) => {
+  console.log(e);
+  formPost.value.MainPicture = e.target.value;
   store.savePost(formPost.value);
 };
 </script>

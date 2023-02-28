@@ -10,9 +10,10 @@ date, author, image, description)
             .BlogPostHeader
                 h2 {{post.Contents[0].Title}}
                 .BlogPostDateAuthor
+                    //- p {{formatDistance(post.Date, new Date())}}
                     p {{post.Date}}
             .BlogPostImage
-                img(:src="post.MainPicture")
+                home-picture(:imageUrl="'http://localhost:3010/' +post.MainPicture")
             .BlogPostDescription
                 p {{post.Abstract}}
                 .BlogPostLink
@@ -25,6 +26,8 @@ date, author, image, description)
 import { computed, ref } from "vue";
 import { useUserStore } from "@/stores/user";
 import type { postType } from "@/types/api";
+import homePicture from "@/components/home/homePicture.vue";
+import { formatDistance } from "date-fns";
 
 const store = useUserStore();
 
@@ -35,8 +38,6 @@ const posts = computed(() => store.posts);
 const postsSorted = ref<postType[]>(posts.value);
 
 postsSorted.value = posts.value.sort((a, b) =>
-    a.Date > b.Date ? -1 : b.Date > a.Date ? 1 : 0
+  a.Date > b.Date ? -1 : b.Date > a.Date ? 1 : 0
 );
-
-console.log("BB", postsSorted.value);
 </script>
